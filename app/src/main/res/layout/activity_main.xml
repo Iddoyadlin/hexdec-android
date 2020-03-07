@@ -9,38 +9,43 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#000000"
         tools:context=".MainActivity">
 
-        <ImageView
-            android:id="@+id/logo"
+        <Button
+            android:id="@+id/play"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
-            android:contentDescription="hexdec logo"
+            android:layout_marginTop="568dp"
+            android:text="Play!"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/max_num"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="184dp"
+            android:layout_width="227dp"
+            android:layout_height="61dp"
+            android:layout_marginTop="308dp"
+            android:autoText="false"
+            android:background="#646464"
             android:ems="10"
+            android:fontFamily="casual"
             android:hint="Enter maximal number"
             android:inputType="numberDecimal"
+            android:textAlignment="center"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <RadioGroup
             android:id="@+id/myRadioGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="300dp"
-            android:background="#abf234"
+            android:layout_width="181dp"
+            android:layout_height="126dp"
+            android:layout_marginTop="408dp"
+            android:background="#00808080"
             android:checkedButton="@+id/sound"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -50,32 +55,48 @@
                 android:id="@+id/hex_to_dec"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="hex-to-dec" />
+                android:buttonTint="#FFFFFF"
+                android:checked="false"
+                android:fontFamily="casual"
+                android:text="hex-to-dec"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp" />
 
             <RadioButton
                 android:id="@+id/dec_to_hex"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="dec-to-hex" />
+                android:buttonTint="#FFFFFF"
+                android:fontFamily="casual"
+                android:text="dec-to-hex"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp" />
 
             <RadioButton
                 android:id="@+id/both"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="both" />
+                android:buttonTint="#FFFFFF"
+                android:fontFamily="casual"
+                android:text="both"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp" />
 
         </RadioGroup>
 
-        <Button
-            android:id="@+id/play"
+        <ImageView
+            android:id="@+id/imageView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="480dp"
-            android:text="Play!"
+            android:layout_marginTop="44dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintHorizontal_bias="0.505"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/logo_black_square" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
