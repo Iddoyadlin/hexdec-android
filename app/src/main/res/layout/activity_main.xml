@@ -10,31 +10,47 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#000000"
-        tools:context=".MainActivity">
+        tools:context=".MainActivity"
+        tools:layout_editor_absoluteX="62dp"
+        tools:layout_editor_absoluteY="-56dp">
 
         <Button
             android:id="@+id/play"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="568dp"
+            android:layout_marginTop="538dp"
+            android:onClick="onPlayClick"
             android:text="Play!"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.1" />
+
+        <EditText
+            android:id="@+id/max_num_input"
+            android:layout_width="89dp"
+            android:layout_height="42dp"
+            android:layout_marginTop="344dp"
+            android:background="#646464"
+            android:fontFamily="casual"
+            android:inputType="numberDecimal"
+            android:text="100"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/max_num"
-            android:layout_width="227dp"
-            android:layout_height="61dp"
-            android:layout_marginTop="308dp"
-            android:autoText="false"
-            android:background="#646464"
-            android:ems="10"
+        <TextView
+            android:id="@+id/max_number"
+            android:layout_width="125dp"
+            android:layout_height="39dp"
+            android:layout_marginTop="284dp"
             android:fontFamily="casual"
-            android:hint="Enter maximal number"
-            android:inputType="numberDecimal"
+            android:text="Max Number:"
             android:textAlignment="center"
+            android:textColor="#FFFFFF"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -56,7 +72,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:buttonTint="#FFFFFF"
-                android:checked="false"
+                android:checked="true"
                 android:fontFamily="casual"
                 android:text="hex-to-dec"
                 android:textAlignment="center"
@@ -88,7 +104,7 @@
         </RadioGroup>
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/logo2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="44dp"
@@ -97,6 +113,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/logo_black_square" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
