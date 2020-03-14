@@ -7,6 +7,7 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import java.util.*
 import kotlin.random.Random
 
 class GameActivity : AppCompatActivity() {
@@ -21,7 +22,7 @@ class GameActivity : AppCompatActivity() {
         var currentGameMode = getCurrentGameMode(userGameMode)
         var displayedNumber = setNewRandomNumber(maxNumber, currentGameMode)
         showKeyboard(currentGameMode)
-
+        startTimer(60)
         answerInput.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 val answer = answerInput.text.toString()
@@ -31,11 +32,32 @@ class GameActivity : AppCompatActivity() {
                     currentGameMode = getCurrentGameMode(userGameMode)
                     displayedNumber = setNewRandomNumber(maxNumber, currentGameMode)
                     answerInput.text = ""
+                    increaseScore()
                 }
                 showKeyboard(currentGameMode)
             }
             true
         }
+
+    }
+
+    private fun startTimer(time: Int) {
+        val timer = Timer()
+        val task = object : TimerTask() {
+            var timePassed = 0
+            val timerView: TextView = findViewById(R.id.timer)
+            override fun run() {
+                timerView.text = (time - timePassed).toString()
+                timePassed++
+            }
+        }
+        timer.schedule(task, 0, 1000)
+    }
+
+    private fun increaseScore() {
+        val timerView: TextView = findViewById(R.id.score)
+        val newScore = Integer.parseInt(timerView.text.toString()) + 1
+        timerView.text = newScore.toString()
 
     }
 
