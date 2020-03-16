@@ -1,6 +1,7 @@
 package com.example.hexdec
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
 import android.view.inputmethod.EditorInfo
@@ -9,6 +10,8 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import java.util.*
 import kotlin.random.Random
+
+const val SCORE = "SCORE"
 
 class GameActivity : AppCompatActivity() {
 
@@ -22,7 +25,7 @@ class GameActivity : AppCompatActivity() {
         var currentGameMode = getCurrentGameMode(userGameMode)
         var displayedNumber = setNewRandomNumber(maxNumber, currentGameMode)
         showKeyboard(currentGameMode)
-        startTimer(60)
+        startTimer(10)
         answerInput.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 val answer = answerInput.text.toString()
@@ -31,14 +34,20 @@ class GameActivity : AppCompatActivity() {
                 if (userWasCorrect) {
                     currentGameMode = getCurrentGameMode(userGameMode)
                     displayedNumber = setNewRandomNumber(maxNumber, currentGameMode)
-                    answerInput.text = ""
                     increaseScore()
                 }
+                answerInput.text = ""
                 showKeyboard(currentGameMode)
             }
             true
         }
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val answerInput: TextView = findViewById(R.id.answer)
+        answerInput.text = "333"
     }
 
     private fun startTimer(time: Int) {
@@ -47,17 +56,32 @@ class GameActivity : AppCompatActivity() {
             var timePassed = 0
             val timerView: TextView = findViewById(R.id.timer)
             override fun run() {
-                timerView.text = (time - timePassed).toString()
-                timePassed++
+                runOnUiThread(object : TimerTask() {
+                    override fun run() {
+                        val timeLeft = time - timePassed
+                        if (timeLeft < 0) {
+                            val intent = Intent(this@GameActivity, ResultActivity::class.java)
+                            val scoreView: TextView = findViewById(R.id.score)
+                            val score = scoreView.text
+                            intent.putExtra(SCORE, score)
+                            timer.cancel()
+                            hideKeyboard()
+                            startActivity(intent)
+                        } else {
+                            timerView.text = timeLeft.toString()
+                            timePassed++
+                        }
+                    }
+                });
             }
         }
         timer.schedule(task, 0, 1000)
     }
 
     private fun increaseScore() {
-        val timerView: TextView = findViewById(R.id.score)
-        val newScore = Integer.parseInt(timerView.text.toString()) + 1
-        timerView.text = newScore.toString()
+        val scoreView: TextView = findViewById(R.id.score)
+        val newScore = Integer.parseInt(scoreView.text.toString()) + 1
+        scoreView.text = newScore.toString()
 
     }
 
@@ -95,5 +119,14 @@ class GameActivity : AppCompatActivity() {
         mImm.restartInput(answerInput)
         answerInput.performClick()
     }
+
+    private fun hideKeyboard() {
+        val answerInput: TextView = findViewById(R.id.answer)
+        answerInput.clearFocus()
+        answerInput.requestFocus()
+        val mImm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        mImm.hideSoftInputFromWindow(answerInput.windowToken, 0);
+    }
+
 
 }
