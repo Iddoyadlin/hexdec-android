@@ -14,7 +14,7 @@
         android:layout_height="63dp"
         android:layout_marginTop="44dp"
         android:fontFamily="casual"
-        android:text="Round over!"
+        android:text="Round Over"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="30sp"
@@ -39,12 +39,28 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <TextView
+        android:id="@+id/best_score_value"
+        android:layout_width="84dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="28dp"
+        android:fontFamily="casual"
+        android:text="500"
+        android:textAlignment="center"
+        android:textColor="#E91E63"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
         android:id="@+id/textView3"
         android:layout_width="397dp"
         android:layout_height="63dp"
         android:layout_marginTop="44dp"
         android:fontFamily="casual"
-        android:text="Your score is:"
+        android:text="Your Score Is:"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="30sp"
@@ -52,31 +68,46 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="143dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="28dp"
+        android:fontFamily="casual"
+        android:text="Best Score:"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/score" />
+
     <Button
         android:id="@+id/button"
         android:layout_width="146dp"
         android:layout_height="64dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="112dp"
         android:backgroundTint="#EED5B2"
         android:fontFamily="casual"
         android:onClick="clickPlayAgain"
         android:text="Play Again"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/score" />
+        app:layout_constraintTop_toBottomOf="@+id/best_score_value" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="144dp"
         android:layout_height="64dp"
-        android:layout_marginTop="68dp"
-        android:layout_marginEnd="44dp"
+        android:layout_marginTop="112dp"
+        android:layout_marginEnd="28dp"
         android:backgroundTint="#EED5B2"
         android:fontFamily="casual"
         android:onClick="clickMainMenu"
         android:text="Main Menu"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/score" />
+        app:layout_constraintTop_toBottomOf="@+id/best_score_value" />
 </androidx.constraintlayout.widget.ConstraintLayout>

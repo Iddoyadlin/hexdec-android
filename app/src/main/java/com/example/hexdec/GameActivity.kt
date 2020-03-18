@@ -43,12 +43,12 @@ class GameActivity : AppCompatActivity() {
         }
 
     }
-
-    override fun onResume() {
-        super.onResume()
-        val answerInput: TextView = findViewById(R.id.answer)
-        answerInput.text = "333"
-    }
+//
+//    override fun onResume() {
+//        super.onResume()
+//        val answerInput: TextView = findViewById(R.id.answer)
+//        answerInput.text = "333"
+//    }
 
     private fun startTimer(time: Int) {
         val timer = Timer()
