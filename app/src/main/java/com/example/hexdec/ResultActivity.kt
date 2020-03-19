@@ -4,8 +4,13 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NavUtils
+
+
+
 
 const val myPrefsKey = "HEXDEC"
 const val bestScoreKey = "BEST_SCORE"
@@ -15,6 +20,7 @@ class ResultActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result)
+
         val score = intent.extras!!.getString(SCORE)
         val scoreView: TextView = findViewById(R.id.score)
         scoreView.text = score
@@ -56,6 +62,8 @@ class ResultActivity : AppCompatActivity() {
 
 
     fun clickPlayAgain(view: View?) {
-        finish()
+        val intent = NavUtils.getParentActivityIntent(this)
+        intent!!.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+        NavUtils.navigateUpTo(this, intent)
     }
 }

@@ -15,40 +15,56 @@ const val SCORE = "SCORE"
 
 class GameActivity : AppCompatActivity() {
 
+    private var displayedNumber: Int? = null
+    private var currentGameMode: Int? = null
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
         val userGameMode = intent.extras!!.getInt(GAME_MODE)
         val maxNumber = intent.extras!!.getInt(MAX_NUM)
         val answerInput: TextView = findViewById(R.id.answer)
-
-        var currentGameMode = getCurrentGameMode(userGameMode)
-        var displayedNumber = setNewRandomNumber(maxNumber, currentGameMode)
-        showKeyboard(currentGameMode)
+        currentGameMode = getCurrentGameMode(userGameMode)
+        displayedNumber = setNewRandomNumber(maxNumber, currentGameMode!!)
+        showKeyboard(currentGameMode!!)
         startTimer(10)
         answerInput.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 val answer = answerInput.text.toString()
                 val userWasCorrect =
-                    compareAnswerAndDisplayedNumber(currentGameMode, answer, displayedNumber)
+                    compareAnswerAndDisplayedNumber(currentGameMode!!, answer, displayedNumber!!)
                 if (userWasCorrect) {
                     currentGameMode = getCurrentGameMode(userGameMode)
-                    displayedNumber = setNewRandomNumber(maxNumber, currentGameMode)
+                    displayedNumber = setNewRandomNumber(maxNumber, currentGameMode!!)
                     increaseScore()
                 }
                 answerInput.text = ""
-                showKeyboard(currentGameMode)
+                showKeyboard(currentGameMode!!)
             }
             true
         }
 
     }
-//
-//    override fun onResume() {
-//        super.onResume()
-//        val answerInput: TextView = findViewById(R.id.answer)
-//        answerInput.text = "333"
-//    }
+
+    override fun onRestart() {
+        super.onRestart()
+        val scoreView: TextView = findViewById(R.id.score)
+        scoreView.text = "0"
+        val userGameMode = intent.extras!!.getInt(GAME_MODE)
+        val maxNumber = intent.extras!!.getInt(MAX_NUM)
+        currentGameMode = getCurrentGameMode(userGameMode)
+        val tt: TimerTask = object : TimerTask() {
+            override fun run() {
+                runOnUiThread(object : TimerTask() {override fun run(){
+                    displayedNumber = setNewRandomNumber(maxNumber, currentGameMode!!)
+                    showKeyboard(0)
+                    startTimer(10)}})
+            }
+        }
+        val timer = Timer()
+        timer.schedule(tt, 500)
+    }
 
     private fun startTimer(time: Int) {
         val timer = Timer()
@@ -65,14 +81,13 @@ class GameActivity : AppCompatActivity() {
                             val score = scoreView.text
                             intent.putExtra(SCORE, score)
                             timer.cancel()
-                            hideKeyboard()
                             startActivity(intent)
                         } else {
                             timerView.text = timeLeft.toString()
                             timePassed++
                         }
                     }
-                });
+                })
             }
         }
         timer.schedule(task, 0, 1000)
@@ -119,14 +134,4 @@ class GameActivity : AppCompatActivity() {
         mImm.restartInput(answerInput)
         answerInput.performClick()
     }
-
-    private fun hideKeyboard() {
-        val answerInput: TextView = findViewById(R.id.answer)
-        answerInput.clearFocus()
-        answerInput.requestFocus()
-        val mImm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        mImm.hideSoftInputFromWindow(answerInput.windowToken, 0);
-    }
-
-
 }

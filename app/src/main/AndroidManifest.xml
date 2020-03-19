@@ -12,11 +12,13 @@
         <activity android:name=".ResultActivity"
             android:parentActivityName=".GameActivity"
             android:theme="@style/AppTheme.NoActionBar"
-        />
+            android:windowSoftInputMode="stateHidden"
+            />
         <activity
             android:name=".GameActivity"
             android:label="game_activity"
             android:theme="@style/AppTheme.NoActionBar"
+            android:launchMode="singleTop"
             android:windowSoftInputMode="stateVisible" />
         <activity
             android:name=".SplashActivity"
