@@ -12,6 +12,7 @@ import java.util.*
 import kotlin.random.Random
 
 const val SCORE = "SCORE"
+const val startTime = 60
 
 class GameActivity : AppCompatActivity() {
 
@@ -28,7 +29,7 @@ class GameActivity : AppCompatActivity() {
         currentGameMode = getCurrentGameMode(userGameMode)
         displayedNumber = setNewRandomNumber(maxNumber, currentGameMode!!)
         showKeyboard(currentGameMode!!)
-        startTimer(10)
+        startTimer(startTime)
         answerInput.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 val answer = answerInput.text.toString()
@@ -49,8 +50,7 @@ class GameActivity : AppCompatActivity() {
 
     override fun onRestart() {
         super.onRestart()
-        val scoreView: TextView = findViewById(R.id.score)
-        scoreView.text = "0"
+        setNewScore(0)
         val userGameMode = intent.extras!!.getInt(GAME_MODE)
         val maxNumber = intent.extras!!.getInt(MAX_NUM)
         currentGameMode = getCurrentGameMode(userGameMode)
@@ -59,7 +59,7 @@ class GameActivity : AppCompatActivity() {
                 runOnUiThread(object : TimerTask() {override fun run(){
                     displayedNumber = setNewRandomNumber(maxNumber, currentGameMode!!)
                     showKeyboard(0)
-                    startTimer(10)}})
+                    startTimer(startTime)}})
             }
         }
         val timer = Timer()
@@ -81,6 +81,10 @@ class GameActivity : AppCompatActivity() {
                             val score = scoreView.text
                             intent.putExtra(SCORE, score)
                             timer.cancel()
+                            val answerInput: TextView = findViewById(R.id.answer)
+                            answerInput.text = ""
+                            timerView.text = startTime.toString()
+                            setNewNumberText("")
                             startActivity(intent)
                         } else {
                             timerView.text = timeLeft.toString()
@@ -96,8 +100,12 @@ class GameActivity : AppCompatActivity() {
     private fun increaseScore() {
         val scoreView: TextView = findViewById(R.id.score)
         val newScore = Integer.parseInt(scoreView.text.toString()) + 1
-        scoreView.text = newScore.toString()
+        setNewScore(newScore)
+    }
 
+    private fun setNewScore(score:Int){
+        val scoreView: TextView = findViewById(R.id.score)
+        scoreView.text = score.toString()
     }
 
     private fun getCurrentGameMode(userGameMode: Int): Int {
@@ -110,10 +118,14 @@ class GameActivity : AppCompatActivity() {
 
     private fun setNewRandomNumber(maxNumber: Int, gameMode: Int): Int {
         val n = Random.nextInt(0, maxNumber + 1)
-        val nView: TextView = findViewById(R.id.rand_num)
         val text = if (gameMode == 0) "0x" + Integer.toHexString(n) else n.toString()
-        nView.text = text
+        setNewNumberText(text)
         return n
+    }
+
+    private fun setNewNumberText(text:String){
+        val nView: TextView = findViewById(R.id.rand_num)
+        nView.text = text
     }
 
     private fun compareAnswerAndDisplayedNumber(gameMode: Int, answer: String, displayedNumber: Int)
