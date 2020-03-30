@@ -1,4 +1,4 @@
-package com.example.hexdec
+package com.boss.hexdec
 
 import android.content.Intent
 import android.os.Bundle

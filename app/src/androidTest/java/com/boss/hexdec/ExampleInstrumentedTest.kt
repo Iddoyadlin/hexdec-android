@@ -1,4 +1,4 @@
-package com.example.hexdec
+package com.boss.hexdec
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

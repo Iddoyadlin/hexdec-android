@@ -1,4 +1,4 @@
-package com.example.hexdec
+package com.boss.hexdec
 
 import org.junit.Test
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.hexdec">
+    package="com.boss.hexdec">
 
     <application
         android:allowBackup="true"
@@ -9,19 +9,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ResultActivity"
-            android:parentActivityName=".GameActivity"
+        <activity android:name="com.boss.hexdec.ResultActivity"
+            android:parentActivityName="com.boss.hexdec.GameActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden"
             />
         <activity
-            android:name=".GameActivity"
+            android:name="com.boss.hexdec.GameActivity"
             android:label="game_activity"
             android:theme="@style/AppTheme.NoActionBar"
             android:launchMode="singleTop"
             android:windowSoftInputMode="stateVisible" />
         <activity
-            android:name=".SplashActivity"
+            android:name="com.boss.hexdec.SplashActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,7 +30,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="com.boss.hexdec.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>
